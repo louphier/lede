@@ -1,0 +1,56 @@
+#
+# This is free software, lisence use MIT.
+# 
+# Copyright (C) 2020 KFERMercer <KFER.Mercer@gmail.com>
+# 
+# <https://github.com/KFERMercer/OpenWrt-CI>
+#
+
+name: Update-helloworld
+
+on:
+  schedule:
+    - cron: 35 19 * * *
+  push:
+    branches: 
+      - master
+  watch:
+    types: started  
+
+jobs:
+
+  prepare:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@master
+      with:
+        ref: master
+        fetch-depth: 0
+        lfs: true
+
+    - name: Set git identity
+      run : |
+        git config --global user.email "louphier@gmail.com"
+        git config --global user.name "louphier"
+
+    - name: Load latest helloworld
+      run: |
+        git clone https://github.com/fw876/helloworld.git --depth=1 ./tmp/helloworld
+        cp -rf ./tmp/helloworld/luci-app-ssr-plus ./package/lean/
+        cp -rf ./tmp/helloworld/tcping ./package/lean/
+        cp -rf ./tmp/helloworld/naiveproxy ./package/lean/
+        cp -rf ./tmp/helloworld/trojan-go ./package/lean/
+
+    - name: Apply commit changes
+      run: |
+        git add ./package/lean/luci-app-ssr-plus/ ./package/lean/tcping/ ./package/lean/naiveproxy/ ./package/lean/trojan-go/
+        echo -e "[bot] luci-app-ssr-plus: update\n\nlatest commit: $(cat ./tmp/helloworld/.git/refs/heads/master)" > ./tmp/message
+        git commit --file="./tmp/message" || exit 0
+
+    - name: Push Commits
+      run: git push origin master
