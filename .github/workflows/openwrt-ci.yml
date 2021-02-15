@@ -39,12 +39,12 @@ jobs:
 
           df -h
 
-      - name: luci-app-clash
-        run: |
-          cd package
-          mkdir luci-app-clash
-          cd luci-app-clash
-          git clone https://github.com/frainzy1477/luci-app-clash.git
+#      - name: luci-app-clash
+#        run: |
+#          cd package
+#          mkdir luci-app-clash
+#          cd luci-app-clash
+#          git clone https://github.com/frainzy1477/luci-app-clash.git
 
       - name: luci-app-openclash
         run: |
@@ -159,7 +159,6 @@ jobs:
           CONFIG_PACKAGE_lsblk=y
           CONFIG_PACKAGE_luci-app-acme=y
           # CONFIG_PACKAGE_luci-app-amule is not set
-          CONFIG_PACKAGE_luci-app-clash=y
           CONFIG_PACKAGE_luci-app-diskman=y
           CONFIG_PACKAGE_luci-app-diskman_INCLUDE_btrfs_progs=y
           CONFIG_PACKAGE_luci-app-diskman_INCLUDE_kmod_md_linear=y
