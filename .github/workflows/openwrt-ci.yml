@@ -38,14 +38,14 @@ jobs:
           sudo -E apt-get clean
 
           df -h
-
+#
 #      - name: luci-app-clash
 #        run: |
 #          cd package
 #          mkdir luci-app-clash
 #          cd luci-app-clash
 #          git clone https://github.com/frainzy1477/luci-app-clash.git
-
+#
       - name: luci-app-openclash
         run: |
           cd package
