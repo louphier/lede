@@ -232,6 +232,9 @@ jobs:
           CONFIG_PACKAGE_uclibcxx=y
           # CONFIG_TARGET_IMAGES_PAD is not set
           # CONFIG_VMDK_IMAGES is not set
+          # CONFIG_v2ray-plugin_INCLUDE_GOPROXY is not set
+          # CONFIG_XRAY_CORE_COMPRESS_GOPROXY is not set
+          # CONFIG_UnblockNeteaseMusicGo_INCLUDE_GOPROXY is not set
           EOF
 
           sed -i 's/^[ \t]*//g' ./.config
