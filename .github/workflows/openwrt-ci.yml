@@ -38,14 +38,14 @@ jobs:
           sudo -E apt-get clean
 
           df -h
-#
+
 #      - name: luci-app-clash
 #        run: |
 #          cd package
 #          mkdir luci-app-clash
 #          cd luci-app-clash
 #          git clone https://github.com/frainzy1477/luci-app-clash.git
-#
+
       - name: luci-app-openclash
         run: |
           cd package
@@ -70,7 +70,14 @@ jobs:
         run: |
           cd package/lean
           git clone https://github.com/jerrykuku/lua-maxminddb.git
-          git clone https://github.com/jerrykuku/luci-app-vssr.git                 
+          git clone https://github.com/jerrykuku/luci-app-vssr.git  
+
+      - name: luci-app-dnsfilter
+        run: |
+          cd package
+          mkdir luci-app-dnsfilter
+          cd luci-app-dnsfilter
+          git clone https://github.com/garypang13/luci-app-dnsfilter.git
 
       - name: Update feeds
         run: |
@@ -168,6 +175,8 @@ jobs:
           CONFIG_PACKAGE_luci-app-frpc=y
           CONFIG_PACKAGE_luci-app-openclash=y
           CONFIG_PACKAGE_luci-app-openvpn=y
+          CONFIG_PACKAGE_luci-app-dnsfilter=y
+          # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
           # CONFIG_PACKAGE_luci-app-qbittorrent is not set
           CONFIG_PACKAGE_luci-app-ttyd=y
           CONFIG_PACKAGE_luci-app-jd-dailybonus=y
